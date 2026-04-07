@@ -1,0 +1,54 @@
+{
+    "name": "crm-desktop",
+    "version": "1.0.0",
+    "main": "main.js",
+    "private": true,
+    "scripts": {
+        "dev": "electron .",
+        "build:ui": "cd ../ && npm run build && xcopy /E /I /Y build desktop\\build",
+        "start": "npm run build:ui && electron .",
+        "dist": "electron-builder",
+        "publish": "electron-builder --publish always"
+    },
+    "devDependencies": {
+        "electron": "^30.5.1",
+        "electron-builder": "^26.7.0"
+    },
+    "build": {
+        "appId": "com.aspire.crm",
+        "productName": "Aspire CRM",
+        "icon": "assets/icon.ico",
+        "directories": {
+            "output": "dist"
+        },
+        "files": [
+            "main.js",
+            "preload.js",
+            "build/**/*",
+            "overlay.html",
+            "splash.html",
+            "assets/**/*",
+            "node_modules/**/*"
+        ],
+        "win": {
+            "target": "nsis",
+            "icon": "assets/icon.ico"
+        },
+        "nsis": {
+            "oneClick": true,
+            "perMachine": false,
+            "allowToChangeInstallationDirectory": false,
+            "deleteAppDataOnUninstall": false
+        },
+        "publish": {
+            "provider": "github",
+            "owner": "sahil46650",
+            "repo": "CRM-App"
+        }
+    },
+    "dependencies": {
+        "electron-updater": "^6.8.3",
+        "form-data": "^4.0.5",
+        "node-fetch": "^2.7.0"
+    }
+}
